@@ -1,25 +1,33 @@
 {
   "name": "anwendungslogik",
   "version": "0.0.1",
-  "description": "RESTful API",
+  "private": true,
+  "description": "New Swagger API Project",
+  "keywords": [],
+  "author": "Dario Leunig, Jendrik Mueller",
+  "homepage": "https://github.com/SoftwareprojektGR4/Anwendungslogik#readme",
+  "license": "",
   "main": "app.js",
+  "dependencies": {
+    "express": "^4.12.3",
+    "pm2": "^2.10.4",
+    "swagger-express-mw": "^0.1.0"
+  },
+  "devDependencies": {
+    "should": "^7.1.1",
+    "supertest": "^1.0.0"
+  },
   "scripts": {
+    "start": "node app.js",
     "restart": "pm2 startOrRestart ecosystem.config.js",
     "deploy": "pm2 deploy ecosystem.config.js production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "swagger project test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SoftwareprojektGR4/Anwendungslogik.git"
   },
-  "author": "Dario Leunig, Jendrik Mueller",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/SoftwareprojektGR4/Anwendungslogik/issues"
-  },
-  "homepage": "https://github.com/SoftwareprojektGR4/Anwendungslogik#readme",
-  "devDependencies": {
-    "express": "^4.16.3",
-    "pm2": "^2.10.4"
   }
 }
