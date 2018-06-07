@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /lobbys:
+  /lobby:
     x-swagger-router-controller: lobby
     get:
       description: Returns a list of all lobby
