@@ -14,7 +14,7 @@ produces:
   - application/json
 paths:
   /lobbys:
-    x-swagger-router-controller: lobbys
+    x-swagger-router-controller: lobby
     get:
       description: Returns a list of all lobby
       operationId: getLobbys

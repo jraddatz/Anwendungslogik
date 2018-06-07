@@ -9,7 +9,7 @@ LOBBYS.set(
 		maxPlayers: 7,
 		password: true
 	}
-)
+);
 
 LOBBYS.set(
 	1,
@@ -20,12 +20,12 @@ LOBBYS.set(
 		maxPlayers: 4,
 		password: false
 	}
-)
+);
 
 function getLobbys(request, response) {
-	response.json(Array.from(LOBBYS.values()));
+  response.json(Array.from(LOBBYS.values()));
 }
 
-module.export = {
-	getLobbys: getLobbys,
+module.exports = {
+  getLobbys: getLobbys,
 };
