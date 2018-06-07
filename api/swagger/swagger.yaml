@@ -1,57 +1,57 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Hello World App
-# during dev, should point to your local machine
+  title: Ludo
 host: localhost:3000
-# basePath prefixes all resource paths 
 basePath: /
-# 
+#
 schemes:
-  # tip: remove http to make production-grade
   - http
   - https
-# format of bodies a client can send (Content-Type)
 consumes:
   - application/json
-# format of the responses to the client (Accepts)
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+  /lobbys:
+    x-swagger-router-controller: lobbys
     get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+      description: Returns a list of all lobby
+      operationId: getLobbys
       responses:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
+            $ref: "#/definitions/Lobbys"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
-# complex objects have schema definitions
+
 definitions:
-  HelloWorldResponse:
-    required:
-      - message
+  Lobby:
     properties:
-      message:
+      id:
+        type: number
+        description: Unique identifier representing a Lobby
+      name:
         type: string
+        description: name of a Lobby
+      currentPlayers:
+        type: number
+        description: number of current Players
+      maxPlayers:
+        type: number
+        description: Number of Max Players
+      password:
+        type: boolean
+        description: Tells if a password is needed or not
+  Lobbys:
+    type: array
+    items:
+      $ref: '#/definitions/Lobby'
   ErrorResponse:
     required:
       - message
