@@ -228,7 +228,51 @@ paths:
               default: "*"
           schema:
             $ref: "#/definitions/PlayerId"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
     
+  /lobby/gamemaster:
+    x-swagger-router-controller: lobby
+    post:
+      description: Returns the game master of a lobby
+      operationId: getGameMaster
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
+        - in: body
+          name: id
+          required: true
+          description: Numeric ID of the Player.
+          schema:
+            $ref: "#/definitions/PlayerId"
+      responses:
+        "200":
+          description: OK
+          headers:
+            Acces-Control-Allow-Credentials:
+              type: boolean
+              default: true
+            Acces-Control-Allow-Headers:
+              type: string
+              default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+            Access-Control-Allow-Methods:
+              type: string
+              default: GET, POST, OPTIONS, PUT, DELETE
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
+          schema:
+            $ref: "#/definitions/Response"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
   
   /swagger:
     x-swagger-pipe: swagger_raw
