@@ -167,37 +167,39 @@ paths:
             
             
   /lobby/players:
-    options:
-      responses:
-       default:
-        description: CORS headers for all operations
-        headers:
-          Acces-Control-Allow-Credentials:
-            type: boolean
-            default: true
-          Acces-Control-Allow-Headers:
-            type: string
-            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
-          Access-Control-Allow-Methods:
-            type: string
-            default: GET, POST, OPTIONS, PUT, DELETE
-          Access-Control-Allow-Origin:
-            type: string
-            default: "*"
     x-swagger-router-controller: lobby
     get:
       description: returns the player in a lobby
       operationId: playersInLobby
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
       responses:
         "200":
           description: Success
+          headers:
+            Acces-Control-Allow-Credentials:
+              type: boolean
+              default: true
+            Acces-Control-Allow-Headers:
+              type: string
+              default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+            Access-Control-Allow-Methods:
+              type: string
+              default: GET, POST, OPTIONS, PUT, DELETE
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
           schema:
-            $ref: "#/definitions/Response"
+            $ref: "#/definitions/Players"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-     
+  
   
   /swagger:
     x-swagger-pipe: swagger_raw
@@ -217,6 +219,10 @@ definitions:
       ping:
         type: number
         description: ping of the player
+  Players:
+    type: array
+    items:
+      $ref: '#/definitions/Player'
   PlayerToLobby:
     properties:
       username:
@@ -269,6 +275,7 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Lobby'
+
   Response:
     required:
       - message
