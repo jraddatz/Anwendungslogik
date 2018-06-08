@@ -93,10 +93,15 @@ function playersInLobby(request, response) {
   }
 }
 
+function kickPlayer(request, response) {
+  response.json({id: 3});
+}
+
 module.exports = {
   getLobbys: getLobbys,
   createLobby: createLobby,
   addPlayerToLobby: addPlayerToLobby,
   removePlayer: removePlayer,
-  playersInLobby: playersInLobby
+  playersInLobby: playersInLobby,
+  kickPlayer: kickPlayer,
 };

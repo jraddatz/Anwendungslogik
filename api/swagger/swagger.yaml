@@ -199,12 +199,46 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+  /lobby/kick:
+    x-swagger-router-controller: lobby
+    delete:
+      description: Kicks a player out of a lobby
+      operationId: kickPlayer
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
+      responses:
+        "200":
+          description: OK
+          headers:
+            Acces-Control-Allow-Credentials:
+              type: boolean
+              default: true
+            Acces-Control-Allow-Headers:
+              type: string
+              default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+            Access-Control-Allow-Methods:
+              type: string
+              default: GET, POST, OPTIONS, PUT, DELETE
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
+          schema:
+            $ref: "#/definitions/PlayerId"
+    
   
   /swagger:
     x-swagger-pipe: swagger_raw
 
 definitions:
+  PlayerId:
+    properties:
+      id:
+        type: number
+        description: Unique identifier of a player
   Player:
     properties:
       id:
