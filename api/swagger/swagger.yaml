@@ -14,6 +14,23 @@ produces:
   - application/json
 paths:
   /lobby:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
     x-swagger-router-controller: lobby
     get:
       description: Returns a list of all lobby
@@ -27,10 +44,196 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+            
+  /lobby/create:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    put:
+      description: Creates a new Lobby and returns the ID of the created Lobby
+      operationId: createLobby
+      produces:
+        - application/json
+      parameters:
+        - name: newLobby
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/NewLobby"
+      responses:
+        "200":
+          description: Created
+          schema:
+            $ref: "#/definitions/LobbyId"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /lobby/join:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    put:
+      description: Adds a Player to a lobby
+      operationId: addPlayerToLobby
+      produces:
+        - application/json
+      parameters:
+        - name: addPlayer
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/PlayerToLobby"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Response"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      
+  /lobby/leave:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    post:
+      description: Removes a Player from a Lobby
+      operationId: removePlayer
+      produces:
+        - application/json
+      parameters:
+        - name: addPlayer
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/PlayerToLobby"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Response"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+            
+  /lobby/players:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    get:
+      description: returns the player in a lobby
+      operationId: playersInLobby
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Response"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+     
+  
   /swagger:
     x-swagger-pipe: swagger_raw
 
 definitions:
+  PlayerToLobby:
+    properties:
+      username:
+        type: string
+        description:  Name of the User
+      lobby:
+        type: number
+        description: Unique identifier representing a Lobby
+  LobbyId:
+    properties:
+      id:
+        type: number
+        description:  Unique identifier representing a Lobby
+  NewLobby:
+    properties:
+      id:
+        type: number
+        description: Unique identifier representing a Lobby
+      name:
+        type: string
+        description: name of the new Lobby
+      username:
+        type: string
+        description: name of the User who created the Lobby
+      password:
+        type: string
+        description: password of the Lobby
+      playerCount:
+        type: number
+        description: number of Players
+        
   Lobby:
     properties:
       id:
@@ -52,6 +255,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Lobby'
+  Response:
+    required:
+      - message
+    properties:
+      message:
+        type: string
   ErrorResponse:
     required:
       - message

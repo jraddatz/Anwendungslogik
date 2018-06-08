@@ -26,6 +26,21 @@ function getLobbys(request, response) {
   response.json(Array.from(LOBBYS.values()));
 }
 
+function createLobby(request, response) {
+  response.json({id: 3});
+}
+
+function addPlayerToLobby(request, response) {
+  response.json({message: "Spieler erfolgreich zu lobby hinzugefügt"});
+}
+
+function removePlayer(request, response) {
+  response.json({message: "Spieler erfolgreich aus lobby entfernt"});
+}
+
 module.exports = {
   getLobbys: getLobbys,
+  createLobby: createLobby,
+  addPlayerToLobby: addPlayerToLobby,
+  removePlayer: removePlayer,
 };
