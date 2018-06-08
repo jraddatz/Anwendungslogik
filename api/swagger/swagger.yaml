@@ -203,6 +203,20 @@ paths:
     x-swagger-pipe: swagger_raw
 
 definitions:
+  Player:
+    properties:
+      id:
+        type: number
+        description: Unique identifier of a Player
+      name:
+        type: string
+        description: Name of the Player
+      amazonecho:
+        type: boolean
+        description: defines if the player has a echo
+      ping:
+        type: number
+        description: ping of the player
   PlayerToLobby:
     properties:
       username:
