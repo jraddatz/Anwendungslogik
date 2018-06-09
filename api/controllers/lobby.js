@@ -105,6 +105,26 @@ function invitePlayers(request, response) {
 	response.json({message: "Spieler erfolgreich in die Lobby eingeladen"});
 }
 
+function setReady(request, response) {
+	response.json({ready: true});
+}
+
+function reciveMessage(request, response) {
+	response.json({message: "Nachricht erhalten"});
+}
+
+function deliverMessages(request, response) {
+	response.json([{username: "theLegend27",time:"2018-08-09",message:"Hi"}]);
+}
+
+function getGeneralLobbyData(request, response) {
+	response.json({gamestart: true,gamemaster:false,kick:false});
+}
+
+function addAlexa(request, response) {
+	response.json({message: "Alexa zur Lobby hinzugefügt"});
+}
+
 module.exports = {
   getLobbys: getLobbys,
   createLobby: createLobby,
@@ -114,4 +134,9 @@ module.exports = {
   kickPlayer: kickPlayer,
   getGameMaster: getGameMaster,
   invitePlayers: invitePlayers,
+  setReady: setReady,
+  reciveMessage: reciveMessage,
+  deliverMessages: deliverMessages,
+  getGeneralLobbyData: getGeneralLobbyData,
+  addAlexa: addAlexa
 };

@@ -311,12 +311,211 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"  
-  
-  
+  /lobby/ready:
+    x-swagger-router-controller: lobby
+    post:
+      description: Sets a Lobby ready
+      operationId: setReady
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
+      responses:
+        "200":
+          description: OK
+          headers:
+            Acces-Control-Allow-Credentials:
+              type: boolean
+              default: true
+            Acces-Control-Allow-Headers:
+              type: string
+              default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+            Access-Control-Allow-Methods:
+              type: string
+              default: GET, POST, OPTIONS, PUT, DELETE
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
+          schema:
+            $ref: "#/definitions/Ready"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+  /lobby/chat:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    put:
+      description: Sends a Message to the lobby chat
+      operationId: reciveMessage
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
+        - in: body
+          name: messageBody
+          required: true
+          description: Sendet Message with timestamp
+          schema:
+            $ref: "#/definitions/Message"
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Response"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      description: Sends a Message to the lobby chat
+      operationId: deliverMessages
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Messages"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      
+  /lobby/update:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    get:
+      description: Returs a general Update to a lobby
+      operationId: getGeneralLobbyData
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/LobbyInfo"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /alexa:  
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    get:
+      description: Adds Alexa tp the Lobby
+      operationId: addAlexa
+      parameters:
+        - in: query
+          name: lobbyid
+          type: integer
+          required: true
+          description: Numeric ID of the Lobby.
+        - in: body
+          name: alexaId
+          required: true
+          description: Id von ALexa
+          schema:
+            $ref: "#/definitions/AlexaId"
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Response"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
   /swagger:
     x-swagger-pipe: swagger_raw
 
 definitions:
+  AlexaId:
+    properties:
+      id:
+        type: number
+        description: Unique Identifier of alexa
+  Message:
+    properties:
+      username:
+        type: string
+        description: Name des Absenders
+      time:
+        type: string
+        description: Zeitstempel, wann die Nachricht abgesendet wurde
+      message:
+        type: string
+        description: Inhalt der Nachricht
+  Messages:
+    type: array
+    items:
+      $ref: '#/definitions/Message'
+  Ready:
+    properties:
+      ready:
+        type: boolean
+        description: Describes if the lobby is ready or not
   PlayerName:
     properties:
       username:
@@ -357,6 +556,18 @@ definitions:
       lobby:
         type: number
         description: Unique identifier representing a Lobby
+        
+  LobbyInfo:
+    properties:
+      gamestart:
+        type: boolean
+        description: true if the game has been started
+      gamemaster:
+        type: boolean
+        description: true if the requesting player is gamemaster
+      kick:
+        type: boolean
+        description: true if the requesting player has been kicked
   LobbyId:
     properties:
       id:
