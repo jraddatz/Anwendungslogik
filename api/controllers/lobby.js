@@ -101,6 +101,10 @@ function getGameMaster(request, response) {
   response.json({message: "Spieler erfolgreich als Spieler eingesetzt"});
 }
 
+function invitePlayers(request, response) {
+	response.json({message: "Spieler erfolgreich in die Lobby eingeladen"});
+}
+
 module.exports = {
   getLobbys: getLobbys,
   createLobby: createLobby,
@@ -108,5 +112,6 @@ module.exports = {
   removePlayer: removePlayer,
   playersInLobby: playersInLobby,
   kickPlayer: kickPlayer,
-  getGameMaster: getGameMaster
+  getGameMaster: getGameMaster,
+  invitePlayers: invitePlayers,
 };
