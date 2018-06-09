@@ -486,11 +486,100 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+     
+  /editor/create:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: editor
+    post:
+      description: Creates a new editor game
+      operationId: createGame
+      parameters:
+        - in: body
+          name: game
+          required: true
+          description: Id von ALexa
+          schema:
+            $ref: "#/definitions/Game"
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/GameId"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: Updates a game
+      operationId: updateGame
+      parameters:
+        - in: body
+          name: game
+          required: true
+          description: Id von ALexa
+          schema:
+            $ref: "#/definitions/Game"
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/GameId"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
             
   /swagger:
     x-swagger-pipe: swagger_raw
 
 definitions:
+  GameId:
+    properties:
+      id:
+        type: number
+        description: Unique identifier of a game
+  Game:
+    properties:
+      name:
+        type: string
+        description: Name of the Game
+      owner:
+        type: number
+        description: Id of the gameowner
+      description:
+        type: string
+        description: Description of the game
+      language:
+        type: string
+        description: language of the game
+      category:
+        type: string
+        description: category of the game
+      subcategory:
+        type: string
+        description: subcategory of the game
+      minPlayers:
+        type: number
+        description: minimum number of players that are required to play the game
+      maxPlayers:
+        type: number
+        description: maximum number of Players
   AlexaId:
     properties:
       id:
