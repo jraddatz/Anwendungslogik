@@ -487,6 +487,23 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /games:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
     x-swagger-router-controller: game
     get:
       description: Sends a Message to the lobby chat
