@@ -45,6 +45,38 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
             
+  /benutzer:
+    options:
+      responses:
+       default:
+        description: CORS headers for all operations
+        headers:
+          Acces-Control-Allow-Credentials:
+            type: boolean
+            default: true
+          Acces-Control-Allow-Headers:
+            type: string
+            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
+          Access-Control-Allow-Methods:
+            type: string
+            default: GET, POST, OPTIONS, PUT, DELETE
+          Access-Control-Allow-Origin:
+            type: string
+            default: "*"
+    x-swagger-router-controller: lobby
+    get:
+      description: Returns a list of all lobby
+      operationId: getLobbys
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Lobbys"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
   /lobby/create:
     options:
       responses:
@@ -482,37 +514,6 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Response"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-  /games:
-    options:
-      responses:
-       default:
-        description: CORS headers for all operations
-        headers:
-          Acces-Control-Allow-Credentials:
-            type: boolean
-            default: true
-          Acces-Control-Allow-Headers:
-            type: string
-            default: Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time
-          Access-Control-Allow-Methods:
-            type: string
-            default: GET, POST, OPTIONS, PUT, DELETE
-          Access-Control-Allow-Origin:
-            type: string
-            default: "*"
-    x-swagger-router-controller: game
-    get:
-      description: Sends a Message to the lobby chat
-      operationId: getGames
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Games"
         default:
           description: Error
           schema:
