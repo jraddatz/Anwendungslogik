@@ -2,6 +2,11 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
+var mongoose = require('mongoose');
+var fs = require('fs');
+var passportLocalMongoose = require("passport-local-mongoose");
+var passport = require("passport");
+
 module.exports = app; // for testing
 
 var config = {
@@ -13,11 +18,23 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 
   // install middleware
   swaggerExpress.register(app);
-
   var port = process.env.PORT || 3000;
-  app.listen(port);
 
-  if (swaggerExpress.runner.swagger.paths['/hello']) {
-    console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
+  // load all model files
+	fs.readdirSync(__dirname+ '/api/models').forEach(function(filename) {
+		if(~filename.indexOf('.js')) require(__dirname + '/api/models/' + filename);
+	});
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  mongoose.connect('mongodb://18.218.110.87/ludodb');
+  mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+  mongoose.connection.once('open', function(){
+  	app.listen(port);
+  });
+
+  if (swaggerExpress.runner.swagger.paths['/lobby']) {
+    console.log('try this:\ncurl http://127.0.0.1:' + port + '/lobby');
   }
 });
