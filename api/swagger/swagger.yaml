@@ -486,7 +486,21 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-     
+  /games:
+    x-swagger-router-controller: game
+    get:
+      description: Sends a Message to the lobby chat
+      operationId: getGames
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Games"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
   /editor/create:
     options:
       responses:
@@ -554,6 +568,10 @@ definitions:
       id:
         type: number
         description: Unique identifier of a game
+  Games:
+    type: array
+    items:
+      $ref: '#/definitions/Game'
   Game:
     properties:
       name:
@@ -645,7 +663,6 @@ definitions:
       lobby:
         type: number
         description: Unique identifier representing a Lobby
-        
   LobbyInfo:
     properties:
       gamestart:
