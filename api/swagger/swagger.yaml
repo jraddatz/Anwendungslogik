@@ -63,10 +63,10 @@ paths:
           Access-Control-Allow-Origin:
             type: string
             default: "*"
-    x-swagger-router-controller: lobby
+    x-swagger-router-controller: game
     get:
-      description: Returns a list of all lobby
-      operationId: getLobbys
+      description: Returns all games
+      operationId: getGames
       responses:
         "200":
           description: Success

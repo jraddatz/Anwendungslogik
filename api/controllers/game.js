@@ -1,5 +1,10 @@
+var data = {
+	id: 1,
+	name: "Dario"
+}
+
 function getGames(request, response) {
-	response.json({id: 3});
+	response.json(data);
 }
 
 module.exports = {
