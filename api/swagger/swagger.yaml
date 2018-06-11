@@ -65,6 +65,7 @@ paths:
             default: "*"
     x-swagger-router-controller: game
     get:
+      produces: ["application/json"]
       description: Returns all games
       operationId: getGames
       responses:
@@ -589,15 +590,15 @@ definitions:
   Game:
     properties:
       id:
-        type: number
+        type: string
         description: Id of the game
       user_id:
-        type: number
-        description: Id of the gameowner
-      maxPlayers:
+        type: string
+        description: Id of the game
+      max_player:
         type: number
         description: maximum number of Players
-      minPlayers:
+      min_player:
         type: number
         description: minimum number of players that are required to play the game
       name:
@@ -743,3 +744,5 @@ definitions:
     properties:
       message:
         type: string
+  Session:
+    type: object

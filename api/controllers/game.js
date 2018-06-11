@@ -1,25 +1,4 @@
-// load all model files
-fs.readdirSync(__dirname+ '/models').forEach(function(filename) {
-	if(~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
-});
-
-// Database Connection
-mongoose.connect('mongodb://localhost/ludodb');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-});
-
-
-/*
-	Returns all games from database ludodb
-*/
-function getGames(request, response) {
-	mongoose.model('game').find(function(err, games) {
-		response.json(game)
-	});
-}
-
+var mongoose = require('mongoose');
 
 var data = [
   {
@@ -37,6 +16,15 @@ var data = [
     "minPlayers": 1
   },
 ]
+
+/*
+	Returns all games from database ludodb
+*/
+function getGames(request, response) {
+	mongoose.model('game').find(function(err, games) {
+    response.send(games);
+	});
+}
 
 module.exports = {
   getGames: getGames
