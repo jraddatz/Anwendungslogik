@@ -1,6 +1,5 @@
 var data = {
-	id: 1,
-	name: "Dario"
+	id: 1
 }
 
 function getGames(request, response) {

@@ -34,7 +34,7 @@ paths:
     x-swagger-router-controller: lobby
     get:
       description: Returns a list of all lobby
-      operationId: getLobbys
+      operationId: getLobby
       responses:
         "200":
           description: Success
@@ -71,7 +71,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/Lobbys"
+            $ref: "#/definitions/PlayerId"
         default:
           description: Error
           schema:
