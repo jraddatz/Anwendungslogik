@@ -25,7 +25,7 @@ function getGames(request, response) {
 	/*mongoose.model('game').find(function(err, games) {
 		console.log(games);
 	});*/
-	response.json("Hallo Welt!");
+	response.json({id: 3});
 }
 
 module.exports = {
