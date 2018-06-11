@@ -4,6 +4,8 @@ var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
 var mongoose = require('mongoose');
 var fs = require('fs');
+var passportLocalMongoose = require("passport-local-mongoose");
+var passport = require("passport");
 
 module.exports = app; // for testing
 
@@ -23,7 +25,10 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 		if(~filename.indexOf('.js')) require(__dirname + '/api/models/' + filename);
 	});
 
-  mongoose.connect('mongodb://localhost/ludodb');
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  mongoose.connect('mongodb://18.218.110.87/ludodb');
   mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
   mongoose.connection.once('open', function(){
   	app.listen(port);
