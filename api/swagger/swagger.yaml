@@ -45,7 +45,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
             
-  /benutzer:
+  /games:
     options:
       responses:
        default:
@@ -71,7 +71,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/PlayerId"
+            $ref: "#/definitions/Games"
         default:
           description: Error
           schema:
@@ -588,30 +588,24 @@ definitions:
         description: Unique identifier of a game
   Game:
     properties:
-      name:
-        type: string
-        description: Name of the Game
-      owner:
+      id:
+        type: number
+        description: Id of the game
+      user_id:
         type: number
         description: Id of the gameowner
-      description:
-        type: string
-        description: Description of the game
-      language:
-        type: string
-        description: language of the game
-      category:
-        type: string
-        description: category of the game
-      subcategory:
-        type: string
-        description: subcategory of the game
-      minPlayers:
-        type: number
-        description: minimum number of players that are required to play the game
       maxPlayers:
         type: number
         description: maximum number of Players
+      minPlayers:
+        type: number
+        description: minimum number of players that are required to play the game
+      name:
+        type: string
+        description: Name of the Game
+      description:
+        type: string
+        description: Description of the game
   Games:
     type: array
     items:
