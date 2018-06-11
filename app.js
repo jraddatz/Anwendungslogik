@@ -2,6 +2,9 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
+var mongoose = require('mongoose');
+var fs = require('fs');
+
 module.exports = app; // for testing
 
 var config = {
