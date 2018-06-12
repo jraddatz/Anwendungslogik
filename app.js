@@ -18,16 +18,13 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   swaggerExpress.register(app);
   var port = process.env.PORT || 3000;
 
-  // Path to store static web content
-  app.use(express.static('public'));
-
   // load all model files
 	fs.readdirSync(__dirname+ '/api/models').forEach(function(filename) {
 		if(~filename.indexOf('.js')) require(__dirname + '/api/models/' + filename);
 	});
 
   // database connection settings
-  //mongoose.connect('mongodb://18.218.110.87/ludodb'); // use for foreign development only
+  // mongoose.connect('mongodb://18.218.110.87/ludodb');
   mongoose.connect('mongodb://localhost/ludodb');
   mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
   mongoose.connection.once('open', function(){

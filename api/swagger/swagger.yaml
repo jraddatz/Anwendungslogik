@@ -65,9 +65,10 @@ paths:
             default: "*"
     x-swagger-router-controller: game
     get:
-      produces: ["application/json"]
       description: Returns all games
       operationId: getGames
+      produces:
+        - application/json
       responses:
         "200":
           description: Success
@@ -744,5 +745,3 @@ definitions:
     properties:
       message:
         type: string
-  Session:
-    type: object
