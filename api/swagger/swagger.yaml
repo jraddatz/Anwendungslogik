@@ -34,7 +34,7 @@ paths:
     x-swagger-router-controller: lobby
     get:
       description: Returns a list of all lobby
-      operationId: getLobby
+      operationId: getLobbys
       responses:
         "200":
           description: Success
