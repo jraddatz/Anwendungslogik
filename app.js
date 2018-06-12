@@ -24,8 +24,8 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 	});
 
   // database connection settings
-  // mongoose.connect('mongodb://18.218.110.87/ludodb');
-  mongoose.connect('mongodb://localhost/ludodb');
+   mongoose.connect('mongodb://18.218.110.87/ludodb');
+  //mongoose.connect('mongodb://localhost/ludodb');
   mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
   mongoose.connection.once('open', function(){
   	app.listen(port);
