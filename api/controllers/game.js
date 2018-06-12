@@ -23,5 +23,5 @@ function getGame(request, response) {
 
 module.exports = {
   getGames: getGames,
-	getGame: getGame,
+  getGame: getGame
 };
