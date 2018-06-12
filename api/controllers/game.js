@@ -10,14 +10,8 @@ function getGames(request, response) {
 
 function getGame(request, response) {
 	let gameId = request.swagger.params.gameid.value;
-	mongoose.model('game').find(function(err, games) {
-		let game;
-		for(item in games){
-			if(games[item]._id == gameId) {
-				game = games[item];
-			}
-		}
-    response.send(game);
+	mongoose.model('game').findById(gameId,function(err, games) {
+    response.send(games);
 	});
 }
 
